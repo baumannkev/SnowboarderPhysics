@@ -6,6 +6,11 @@ public class LevelManager : MonoBehaviour
 {
     public void RestartLevel()
     {
+        Invoke("RestartHandler", 1.5f);
+    }
+
+    public void RestartHandler()
+    {
         SceneManager.LoadScene("Level1");
     }
 }
