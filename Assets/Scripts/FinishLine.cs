@@ -17,19 +17,15 @@ public class FinishLine : MonoBehaviour
         if (other.tag == "Player")
         {
             timer.Finish();
+
             finishLineEffect.Play();
             GetComponent<AudioSource>().Play();
             
             // Stop the player
             player.baseSpeed = Mathf.Lerp(player.baseSpeed, 1, 5.0f);
-            // StartCoroutine(StopPlayerGradually(2f));
-            // Invoke("ReloadScene", loadDelay);
+            
         }
     }
     
 
-    void ReloadScene()
-    {
-        SceneManager.LoadScene("Level1");
-    }
 }

@@ -9,8 +9,18 @@ public class LevelManager : MonoBehaviour
         Invoke("RestartHandler", 1.5f);
     }
 
+    public void BackHome()
+    {
+        Invoke("BackToMainHandler", 1.5f);
+    }
+
     public void RestartHandler()
     {
         SceneManager.LoadScene("Level1");
+    }
+
+    public void BackToMainHandler()
+    {
+        SceneManager.LoadScene("Start");
     }
 }

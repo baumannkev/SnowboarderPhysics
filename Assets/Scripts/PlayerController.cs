@@ -26,11 +26,16 @@ public class PlayerController : MonoBehaviour
     public Vector2 playerVelocity;
 
     public float maxVelocity = 0f;
+    
+    //Total Points in each round
     public float totalPoints;
 
     public Timer timer;
 
     private Rigidbody2D rb2d;
+
+    public AudioSource snowboardSFX;
+    public AudioSource bellAudioSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -88,8 +93,8 @@ public class PlayerController : MonoBehaviour
         float rotationPoints = totalRotations * rotationWeight;
         float timePoints = timer.timeElapsed > 0 ? timeWeight / timer.timeElapsed : 0;
 
-        totalPoints = airTimePoints + rotationPoints + timePoints; 
-            
+        totalPoints = airTimePoints + rotationPoints + timePoints;
+
         //
         //
         // totalPoints += rotationWeight * rotationCounter + airTimeWeight * airTimePoints;
@@ -108,6 +113,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            snowboardSFX.Play();
         }
     }
     
@@ -116,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
+            snowboardSFX.Stop();
         }
     }
 
@@ -157,10 +164,11 @@ public class PlayerController : MonoBehaviour
             if (rotationDifference > 180) rotationDifference -= 270f;
             if (rotationDifference < -180) rotationDifference += 270f;
 
-            rotationCounter += rotationDifference;
+            rotationCounter += Mathf.Abs(rotationDifference);
 
             if (Mathf.Abs(rotationCounter) >= 270f)
             {
+                bellAudioSFX.Play();
                 totalRotations += (int)(rotationCounter / 270f);
                 rotationCounter %= 270f;
             }
