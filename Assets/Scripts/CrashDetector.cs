@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CrashDetector : MonoBehaviour
 {
-    
-    
     [SerializeField] private float loadDelay = 0.5f;
     [SerializeField] private ParticleSystem crashEffect;
     [SerializeField] private AudioClip crashSFX;
@@ -26,6 +24,8 @@ public class CrashDetector : MonoBehaviour
 
     void ReloadScene()
     {
-        SceneManager.LoadScene("Level1");        
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(currentSceneIndex);      
     }
 }

@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource snowboardSFX;
     public AudioSource bellAudioSFX;
+    
+    public int coinCount;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +73,14 @@ public class PlayerController : MonoBehaviour
         // }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Coin")
+        {
+            coinCount++;
+            Destroy(col.gameObject, 0.2f);
+        }
+    }
     public float GetMaxVelocity()
     {
         return maxVelocity;
